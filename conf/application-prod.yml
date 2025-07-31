@@ -1,0 +1,69 @@
+spring:
+  application:
+    name: settlement-chain
+  datasource:
+    url: jdbc:h2:file:./data/settlement_db  # 当前目录下的data文件夹
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  h2:
+    console:
+      enabled: false
+      path: /h2-console
+      settings:
+        web-allow-others: false
+  # JPA配置
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+# 服务器配置
+server:
+  port: [#SC_ROUTER_SERVER_PORT]
+
+# 日志配置
+logging:
+  level:
+    root: [#SC_ROUTER_ROOT_LOG_LEVEL] #INFO
+    com.settlement: [#SC_ROUTER_SETTLEMENT_LOG_LEVEL] #DEBUG
+
+# 自定义配置
+settlement:
+  # 任务配置
+  task:
+    retry-max-count: [#SC_ROUTER_RETRY_MAX_COUNT] # 3
+    retry-interval: [#SC_ROUTER_RETRY_INTERVAL]  # 5分钟，单位：毫秒 30000
+
+  # sc配置
+blockchain:
+  url:
+    - ${ROUTER_BLOCKCHAIN_URL:[#SC_ROUTER_BLOCKCHAIN_URL]}
+  chainId: [#SC_ROUTER_CHAIN_ID]
+  contract-setting-address: "[#SC_ROUTER_CONTRACT_SETTING_ADDRESS]"
+  contract-order-address: "[#SC_ROUTER_CONTRACT_ORDER_ADDRESS]"
+  timeout: 5000
+  #  no 0x prefix
+  private-key: "[#SC_ROUTER_PRIVATE_KEY]"
+  chain-key-map:
+    [#SC_ROUTER_ETH_CHAINID]:
+      - "[#SC_ROUTER_ETH_PRIVATE_KEY]"
+      - "[#SC_ROUTER_ETH_PBRIDGE_ADDRESS]"
+    [#SC_ROUTER_SEPOLIA_CHAINID]:
+      - "[#SC_ROUTER_SEPOLIA_PRIVATE_KEY]"
+      - "[#SC_ROUTER_SEPOLIA_PBRIDGE_ADDRESS]"
+    [#SC_ROUTER_POLYGON_CHAINID]:
+      - "[#SC_ROUTER_POLYGON_PRIVATE_KEY]"
+      - "[#SC_ROUTER_POLYGON_PUBLIC_KEY]"
+    [#SC_ROUTER_AMOY_CHAINID]:
+      - "[#SC_ROUTER_AMOY_PRIVATE_KEY]"
+      - "[#SC_ROUTER_AMOY_PUBLIC_KEY]"
+    [#SC_ROUTER_POTOS_MAINNET_CHAINID]:
+      - "[#SC_ROUTER_POTOS_MAINNET_PRIVATE_KEY]"
+      - "[#SC_ROUTER_POTOS_MAINNET_PUBLIC_KEY]"
+    [#SC_ROUTER_POTOS_TESTNET_CHAINID]:
+      - "[#SC_ROUTER_POTOS_TESTNET_PRIVATE_KEY]"
+      - "[#SC_ROUTER_POTOS_TESTNET_PUBLIC_KEY]"

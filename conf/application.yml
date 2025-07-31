@@ -1,0 +1,65 @@
+spring:
+  application:
+    name: settlement-chain
+  # H2数据库配置（持久化到当前项目目录下的data文件夹）
+  datasource:
+    url: jdbc:h2:file:./data/settlement_db  # 当前目录下的data文件夹
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+  # 启用H2控制台（开发环境方便调试）
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+      settings:
+        web-allow-others: false
+  # JPA配置
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+
+# 服务器配置
+server:
+  port: 55123
+
+# 日志配置
+logging:
+  level:
+    root: INFO
+    com.settlement: DEBUG
+
+# 自定义配置
+settlement:
+  # 任务配置
+  task:
+    retry-max-count: 3
+    retry-interval: 300000  # 5分钟，单位：毫秒
+
+  # sc配置
+blockchain:
+  url:
+    - ${ROUTER_BLOCKCHAIN_URL:http://18.167.168.64:8545}
+  chainId: 60600
+  contract-setting-address: "0x9Fd900Fd6f7ba3bcc7E057760F9C7A3f4174329F"
+  contract-order-address: "0xbd8801d4188a7c8eBc1aF43acEdf5f0467592aA0"
+  timeout: 5000
+  #  no 0x prefix
+  private-key: "5ab8223a7b6656e939a4ebf233e3bcf8e230163d4048b9cb6380e1d9ad555ba9"
+  chain-key-map:
+    000000000000000000000000000000000000000000000000000000000000c5a8:
+      - "ac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80"
+      - "0x36C02dA8a0983159322a80FFE9F24b1acfF8B570"
+    000000000000000000000000000000000000000000000000000000000000c5a9:
+      - "59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d"
+      - "0x199c27B10a195ee79e02d50846e59A4aFB82CAD1"
+    0000000000000000000000000000000000000000000000000000000000aa36a7:
+      - "59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d"
+      - "0xc6F1c246003254ed969b34d7903003B3Ad38A5Bf"
+    0000000000000000000000000000000000000000000000000000000000013882:
+      - "59c6995e998f97a5a0044966f0945389dc9e86dae88c7a8412f4603b6b78690d"
+      - "0x34499060fBA1e23e12A7E329aa338d70246B96aa"

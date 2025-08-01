@@ -5,7 +5,7 @@
 		<!-- log level -->
 		<Property name="LOG_LEVEL">[#SC_ROUTER_LOG_LEVEL]</Property>
 		<!-- log location -->
-		<Property name="LOG_HOME">>[#SC_ROUTER_LOG_HOME]</Property>
+		<Property name="LOG_HOME">[#SC_ROUTER_LOG_HOME]</Property>
 		<!-- log name -->
 		<Property name="APP_NAME">settlement-router</Property>
 		<property name="MONITOR_LOG_PATTERN" value="[%-p][%d{yyyy-MM-dd HH:mm:ss.SSS}][%t][%F:%L][%m]%n"/>

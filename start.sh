@@ -6,7 +6,7 @@ cd $dirpath
 JAVA_HOME=[#JAVA_HOME]
 APP_MAIN=com.wetech.settlement.RouterApplication
 APP_NAME="settlement-router"
-CLASSPATH='conf/:app/router.jar:libs/*'
+CLASSPATH='conf/:app/*:libs/*'
 CURRENT_DIR=`pwd`
 LOG_DIR=${CURRENT_DIR}/logs
 CONF_DIR=${CURRENT_DIR}/conf
